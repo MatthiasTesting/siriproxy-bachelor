@@ -1,10 +1,5 @@
 require 'cora'
 require 'siri_objects'
-require 'pp'
-require 'json'
-require 'httparty'
-require 'nokogirl'
-require 'open-uri'
 
 #######
 # This is a "hello world" style plugin. It simply intercepts the phrase "test siri proxy" and responds
@@ -16,38 +11,8 @@ require 'open-uri'
 
 class SiriProxy::Plugin::Bachelor < SiriProxy::Plugin
   def initialize(config)
-      @sapgw_hostname = "http://bfessfd.intern.itelligence.de:8000/"
+   
     #if you have custom configuration options, process them here!
-  end
-
-  def test_connection
-    uri = "#{sapgw_hostname}sap/opu/odata/sap/ZLIST_SRV/Pages?sap-ds-debug=true&sap-langu=en&$filter=Parent eq '0'"
-    doc = Nokogiri::HTML(open(uri))
-    puts "Opened URL"
-    
-    @response = "Connection Error"
-    
-    doc.xpath('//updated').each do |value|
-      @response = value.content
-    end
-    @response = "SAP Server : " + @sapgw_hostname + "Company : " + @response
-    return @response
-  end
-  
-  listen_for /test connection/i do
-    say "Testing, one moment please"
-    
-    Thread.new (
-            t = test_connection
-            object = SiriAddView.news
-            object.make_root(last_ref_id)
-            say "Connection to SAP is successful"
-            answer = SiriAnswer.new(t)
-            objects.views << SiriAnswerSnippet.new([answer])
-            send_object object
-            
-            request_completed 
-      )
   end
 
   listen_for /test siri proxy/i do
