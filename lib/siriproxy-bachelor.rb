@@ -16,7 +16,7 @@ require 'open-uri'
 
 class SiriProxy::Plugin::Bachelor < SiriProxy::Plugin
   def initialize(config)
-      @sapgw_hostname = "http://bfessfd.intern.itelligence.de:8000/
+      @sapgw_hostname = "http://bfessfd.intern.itelligence.de:8000/"
     #if you have custom configuration options, process them here!
   end
 
