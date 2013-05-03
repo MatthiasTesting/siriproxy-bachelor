@@ -27,7 +27,7 @@ class SiriProxy::Plugin::Bachelor < SiriProxy::Plugin
     #    modifications made to it)
   end
 
-  listen_for /where am i/i do
+  listen_for /wo bin ich i/i do
     say "Your location is: #{location.address}"
   end
 
